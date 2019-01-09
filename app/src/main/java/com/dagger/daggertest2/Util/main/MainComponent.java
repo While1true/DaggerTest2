@@ -4,7 +4,6 @@ package com.dagger.daggertest2.Util.main;
 import android.content.Context;
 
 import com.dagger.daggertest2.MainActivity;
-import com.dagger.daggertest2.Util.App.AppContext;
 import com.dagger.daggertest2.Util.App.UserScope;
 import com.dagger.daggertest2.Util.Presents.MainPresent;
 
@@ -23,9 +22,4 @@ public interface MainComponent {
     void inject(MainActivity activity);
 
     MainPresent get();
-
-    @Subcomponent.Builder
-    interface Builder {
-        MainComponent build();
-    }
 }

@@ -7,18 +7,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dagger.daggertest2.Util.Presents.MainPresent;
+import com.dagger.daggertest2.Util.Presents.SecondPresent;
+import com.dagger.daggertest2.Util.Second.SecondComponent;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity {
 
     @Inject
-    MainPresent present1;
+    SecondPresent present1;
     @Inject
-    MainPresent present2;
+    SecondPresent present2;
+    private SecondComponent second;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +34,15 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.test1:
-                APP.getActivityComponent().getMain().inject(this);
+                if(second==null) {
+                    second = APP.getActivityComponent().getSecond();
+                }
+                second.inject(this);
                _show( present1.hashCode()+""+present1.getData());
                _show( present2.hashCode()+""+present2.getData());
                 break;
             case R.id.test2:
-                startActivity(new Intent(this,SecondActivity.class));
+                startActivity(new Intent(this,MainActivity.class));
                 break;
         }
     }
